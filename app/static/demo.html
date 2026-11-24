@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pixel Peak Digital (LeadPilot demo site)</title>
+<style>
+ *{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:#0f172a;background:#fff}
+ nav{display:flex;justify-content:space-between;align-items:center;padding:18px 7vw;border-bottom:1px solid #eef0f5}
+ .logo{font-weight:800;font-size:20px;color:#4f46e5}
+ nav a{margin-left:22px;color:#475569;text-decoration:none;font-size:14px}
+ .hero{padding:80px 7vw 70px;background:linear-gradient(135deg,#eef2ff,#f8fafc);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+ h1{font-size:46px;line-height:1.1;margin:0 0 16px}h1 span{color:#4f46e5}
+ .hero p{font-size:18px;color:#475569;max-width:520px}
+ .cta{display:inline-block;margin-top:20px;background:#4f46e5;color:#fff;padding:14px 26px;border-radius:30px;font-weight:600;text-decoration:none}
+ .card-art{height:280px;border-radius:24px;background:linear-gradient(135deg,#6366f1,#22d3ee);box-shadow:0 30px 60px rgba(79,70,229,.25);position:relative}
+ .card-art:after{content:"+212% leads";position:absolute;left:24px;bottom:24px;background:#fff;padding:10px 16px;border-radius:12px;font-weight:700;color:#4f46e5}
+ .services{padding:60px 7vw;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+ .s{border:1px solid #e8ebf3;border-radius:16px;padding:22px}.s b{display:block;margin-bottom:8px}.s span{color:#64748b;font-size:14px}
+ .note{margin:0 7vw 50px;padding:12px 16px;border-radius:10px;background:#fff8e6;color:#8a5a00;font-size:13px}
+ footer{padding:26px 7vw;border-top:1px solid #eef0f5;color:#94a3b8;font-size:13px}
+ @media(max-width:800px){.hero{grid-template-columns:1fr}.services{grid-template-columns:1fr 1fr}h1{font-size:34px}}
+</style></head><body>
+<nav><div class="logo">Pixel Peak Digital</div><div><a>Services</a><a>Work</a><a>About</a><a>Contact</a></div></nav>
+<section class="hero"><div>
+ <h1>We build websites that <span>bring you customers</span></h1>
+ <p>Web design, SEO, ads and social media for growing businesses. Tell our AI assistant what you need and get a reply in minutes.</p>
+ <a class="cta" href="#">Chat with us</a></div><div class="card-art"></div></section>
+<section class="services">
+ <div class="s"><b>Website Design</b><span>Fast, modern sites that convert visitors.</span></div>
+ <div class="s"><b>SEO</b><span>Rank higher and get found on Google.</span></div>
+ <div class="s"><b>Paid Ads</b><span>Google and Meta campaigns with clear reporting.</span></div>
+ <div class="s"><b>AI Automation</b><span>Chatbots and follow-ups that never sleep.</span></div>
+</section>
+<div class="note">This is a demo website for LeadPilot. The chat bubble at the bottom right is the AI lead agent: it talks to visitors, scores each lead, and writes the follow-up email. See results in the <a href="/dashboard">dashboard</a>.</div>
+<footer>&copy; Pixel Peak Digital (demo business). Powered by LeadPilot.</footer>
+<script src="/widget.js" data-title="Pixel Peak Digital"></script>
+</body></html>

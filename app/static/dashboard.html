@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LeadPilot Dashboard</title>
+<style>
+ :root{--bg:#f4f6fb;--card:#fff;--ink:#0f172a;--mut:#64748b;--line:#e6e9f2;--brand:#4f46e5;--hot:#ef4444;--warm:#f59e0b;--cold:#3b82f6;--ok:#16a34a}
+ *{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}
+ header{background:linear-gradient(135deg,#1e1b4b,#4f46e5);color:#fff;padding:16px 28px;display:flex;justify-content:space-between;align-items:center}
+ header h1{margin:0;font-size:20px}header small{opacity:.8;display:block;font-size:12px;font-weight:400}
+ .hbtns button,.hbtns a{background:rgba(255,255,255,.15);border:0;color:#fff;padding:8px 14px;border-radius:20px;cursor:pointer;margin-left:8px;text-decoration:none;font-size:13px}
+ .wrap{max-width:1250px;margin:0 auto;padding:20px 28px}
+ .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:18px}
+ .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+ .stat b{font-size:28px;display:block}.stat span{color:var(--mut);font-size:13px}
+ .stat.hot b{color:var(--hot)}.stat.warm b{color:var(--warm)}.stat.cold b{color:var(--cold)}.stat.won b{color:var(--ok)}
+ .main{display:grid;grid-template-columns:420px 1fr;gap:18px;align-items:start}
+ .panel{background:var(--card);border:1px solid var(--line);border-radius:14px}
+ .tabs{display:flex;gap:6px;padding:12px;border-bottom:1px solid var(--line)}
+ .tabs button{border:0;background:#eef0f7;border-radius:18px;padding:6px 14px;cursor:pointer;font-size:13px}
+ .tabs button.on{background:var(--brand);color:#fff}
+ .list{max-height:640px;overflow-y:auto}
+ .row{padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer;display:flex;gap:12px;align-items:center}
+ .row:hover,.row.sel{background:#f5f6ff}
+ .score{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex:none}
+ .score.hot{background:var(--hot)}.score.warm{background:var(--warm)}.score.cold{background:var(--cold)}.score.none{background:#cbd5e1}
+ .row b{display:block}.row span{color:var(--mut);font-size:12px}
+ .tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#eef0f7;margin-left:6px;color:#475569}
+ .detail{padding:20px}
+ .detail h2{margin:0 0 4px}.meta{color:var(--mut);font-size:13px;margin-bottom:14px}
+ .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+ .kv{background:#f7f8fc;border-radius:10px;padding:10px 12px}.kv span{display:block;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+ .box{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px}
+ .box h4{margin:0 0 8px;font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px}
+ pre{white-space:pre-wrap;font-family:inherit;margin:0;font-size:14px;line-height:1.5}
+ .chat{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto}
+ .m{padding:7px 11px;border-radius:12px;font-size:13px;max-width:85%}
+ .m.assistant{background:#f1f3f9;align-self:flex-start}.m.user{background:var(--brand);color:#fff;align-self:flex-end}
+ .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+ button.b{border:0;border-radius:18px;padding:8px 16px;cursor:pointer;font-weight:600;background:#eef0f7}
+ button.b.p{background:var(--brand);color:#fff}button.b.d{color:#b91c1c}
+ select{border:1px solid #d0d7e4;border-radius:8px;padding:7px}
+ .empty{padding:50px 20px;text-align:center;color:var(--mut)}
+ dialog{border:0;border-radius:14px;padding:22px;width:460px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+ dialog label{display:block;margin:10px 0 4px;font-weight:600;font-size:13px}dialog input,dialog textarea{width:100%;border:1px solid #d0d7e4;border-radius:8px;padding:8px;font:inherit}
+ #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:10px 18px;border-radius:20px;display:none;font-size:13px}
+ @media(max-width:1000px){.main{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+</style></head><body>
+<header><div><h1>LeadPilot <small id="mode">AI lead qualifier &amp; follow-up agent</small></h1></div>
+ <div class="hbtns"><a href="/" target="_blank">Open demo site</a><button id="bProfile">Business profile</button><button id="bSeed">Load sample leads</button></div></header>
+<div class="wrap">
+ <div class="stats" id="stats"></div>
+ <div class="main">
+  <div class="panel"><div class="tabs" id="tabs"></div><div class="list" id="list"></div></div>
+  <div class="panel detail" id="detail"><div class="empty">Select a lead to see the AI summary and the follow-up email.</div></div>
+ </div>
+</div>
+<dialog id="dlg"><h3 style="margin-top:0">Business profile</h3>
+ <label>Business name</label><input id="pName">
+ <label>Services (the AI uses this when chatting)</label><textarea id="pServ" rows="3"></textarea>
+ <div class="acts"><button class="b p" id="pSave">Save</button><button class="b" id="pClose">Close</button></div></dialog>
+<div id="toast"></div>
+<script src="/static/dashboard.js"></script>
+</body></html>
